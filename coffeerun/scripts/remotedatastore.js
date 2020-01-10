@@ -31,6 +31,12 @@
     })
   };
 
+  RemoteDataStore.prototype.remove = function (key) {
+    $.ajax(this.serviceUrl + '/' + key, {
+      type: 'DELETE'
+    });
+  };
+
   App.RemoteDataStore = RemoteDataStore;
   window.App = App;
 }(window));
