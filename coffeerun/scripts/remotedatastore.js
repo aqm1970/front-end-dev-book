@@ -11,28 +11,32 @@
     this.serviceUrl = url;
   };
 
-  RemoteDataStore.prototype.add = function (key, val) {
-    $.post(this.serviceUrl, val, function (serverResponse) {
+  RemoteDataStore.prototype.add = function(key, val) {
+    return $.post(this.serviceUrl, val, function(serverResponse) {
       console.log(serverResponse);
     });
   };
 
-  RemoteDataStore.prototype.getAll = function (cb) {
-    $.get(this.serviceUrl, function (serverResponse) {
-      console.log(serverResponse);
-      cb(serverResponse);
+  RemoteDataStore.prototype.getAll = function(cb) {
+    return $.get(this.serviceUrl, function(serverResponse) {
+      if (cb) {
+        console.log(serverResponse);
+        cb(serverResponse);
+      }
     });
   };
 
-  RemoteDataStore.prototype.get = function (key, cb) {
-    $.get(this.serviceUrl + '/' + key, function (serverResponse) {
-      console.log(serverResponse);
-      cb(serverResponse);
+  RemoteDataStore.prototype.get = function(key, cb) {
+    return $.get(this.serviceUrl + '/' + key, function(serverResponse) {
+      if (cb) {
+        console.log(serverResponse);
+        cb(serverResponse);
+      }
     })
   };
 
-  RemoteDataStore.prototype.remove = function (key) {
-    $.ajax(this.serviceUrl + '/' + key, {
+  RemoteDataStore.prototype.remove = function(key) {
+    return $.ajax(this.serviceUrl + '/' + key, {
       type: 'DELETE'
     });
   };
